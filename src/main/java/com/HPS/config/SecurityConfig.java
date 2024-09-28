@@ -1,33 +1,8 @@
 package com.HPS.config;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.web.SecurityFilterChain;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//            .csrf().disable() 
-//            .authorizeRequests()
-//                .requestMatchers("/patients/**").hasRole("ADMIN") 
-//                .anyRequest().authenticated() 
-//            .and()
-//            .httpBasic(); 
-//        
-//        return http.build();
-//    }
-//}
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -36,25 +11,59 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfig {
 
-    private final JWTAuthenticationFilter jwtAuthFilter;
+//    private final JWTAuthenticationFilter jwtAuthFilter;
+//
+//    public SecurityConfig(JWTAuthenticationFilter jwtAuthFilter) {
+//        this.jwtAuthFilter = jwtAuthFilter;
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    	http
+//        .cors().disable()
+//        .csrf().disable()
+//        .authorizeRequests()
+//        .requestMatchers("/api/patients/**").permitAll()
+//        .anyRequest().authenticated()
+//        .and()
+//        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+////            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
+	
+	@Autowired
+	private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+	
+	 private final JWTAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(JWTAuthenticationFilter jwtAuthFilter) {
-        this.jwtAuthFilter = jwtAuthFilter;
-    }
+	    public SecurityConfig(JWTAuthenticationFilter jwtAuthenticationFilter) {
+	        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+	    }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/api/patients/**").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+	    @Bean
+	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	        http
+	            .csrf().disable()
+	            .authorizeRequests()
+	                .requestMatchers("/public/**").permitAll()
+	                .requestMatchers("/api/**").authenticated()
+	                .anyRequest().authenticated()
+	            .and()
+	            .exceptionHandling().authenticationEntryPoint( customAuthenticationEntryPoint) // Your custom entry point for unauthorized access
+	            .and()
+	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // No session management
+	            .and()
+	            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter
 
-        return http.build();
-    }
+	        return http.build();
+	    }
+	
 }
+
+
+
