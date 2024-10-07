@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class PatientController {
 	private PatientService patientService;
 
 	// Save Data
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PostMapping("/patients")
 	public ResponseEntity<?> savePatient(@RequestBody PatientEntity patiententity) {
 
@@ -55,6 +57,7 @@ public class PatientController {
 	}
 
 	// Fetch Data by Id
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("patients/{patientId}")
 	public ResponseEntity<?> fetchPentient(@PathVariable int patientId) {
 
@@ -76,7 +79,7 @@ public class PatientController {
 	}
 
 	// Fetch All Data
-//	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping("/patients/demo")
 	public ResponseEntity<List<PatientEntity>> fetchAllPatients() {
 		logger.info("Fetching all patients");
