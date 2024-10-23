@@ -29,7 +29,7 @@ public class SecurityConfig {
       http  
          .csrf().disable()  
          .authorizeRequests()  
-         .requestMatchers("/public/**").permitAll()  
+         .requestMatchers("/public/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()  
          .requestMatchers("/api/**").hasAuthority("ADMIN")   
          .anyRequest().authenticated()  
          .and()  

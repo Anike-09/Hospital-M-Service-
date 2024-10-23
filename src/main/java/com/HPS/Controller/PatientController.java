@@ -106,6 +106,7 @@ public class PatientController {
 //	}
 
 	// Update Patient By ID
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@PutMapping("/patients/{patientId}")
 	public ResponseEntity<PatientEntity> updatePatient(@RequestBody PatientEntity patiententity,
 			@PathVariable int patientId) {
@@ -118,6 +119,7 @@ public class PatientController {
 	}
 
 	// Delete Patient By ID
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@DeleteMapping("/patients/patientsSoft/{patientId}")
 	public ResponseEntity<String> softDelete(@PathVariable Integer patientId) {
 
