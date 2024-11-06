@@ -1,9 +1,10 @@
+version: '3'
 services:
   hospital-service:
- #   image: ${aniketharugade09}/hospital-management-service:${BUILD_NUMBER}
- 
+    image: ${DOCKER_USERNAME}/hospital-management-service:46
+    build:
+      context: .
     ports:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-    restart: unless-stopped
