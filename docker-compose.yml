@@ -1,6 +1,7 @@
 services:
   hospital-service:
-    image: ${DOCKER_USERNAME}/hospital-management-service:${BUILD_NUMBER}
+ #   image: ${aniketharugade09}/hospital-management-service:${BUILD_NUMBER}
+ 
     ports:
       - "8080:8080"
     environment:
