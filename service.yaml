@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: hospital-management-service
 spec:
-  selector:
-    app: hospital-management-service
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
   type: NodePort
+  selector:
+    app: hospital-management
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
