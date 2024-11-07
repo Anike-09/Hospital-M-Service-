@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hospital-management-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hospital-management-service
+  template:
+    metadata:
+      labels:
+        app: hospital-management-service
+    spec:
+      containers:
+        - name: hospital-management-service
+          image: aniketharugade09/hospital-management-service:latest  # Ensure the Docker image name and tag are correct
+          ports:
+            - containerPort: 8080
