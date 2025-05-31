@@ -14,4 +14,8 @@ public class Constant {
 	public static final int MAX_OPTIONAL_HOLIDAYS_PERYEAR = 5;
 
 	public static final int MAX_OPTIONAL_HOLIDAYER_YEAR = 5;
+	
+	
+	public static final int MAX_OPTIONAL_HOLDAYER_YEAR = 5;
+	public static final int MAX_OTIONAL_HOLIDAYER_YEAR = 5;
 }
