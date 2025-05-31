@@ -7,7 +7,7 @@ public class Constant {
 	public static final String SOMETHING_WENT_WRONG = "Something is wrong ";
 	public static final String DELETE_SUCCESS = "Delete Successfully";
 	public static final String SOME_IS_WRONG = "Something is wrong";
-	public static final int MAX_OPTIONAL_HOLIDAYS_PER_YEAR = 5;
+	public static final int MAX_OPT_HOLIDAYS_PER_YEAR = 5;
 	
 	public static final int MAX_OPTIONAL_HOLIDAYS_PER = 5;
 	
