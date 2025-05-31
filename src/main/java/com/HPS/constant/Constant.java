@@ -15,7 +15,7 @@ public class Constant {
 
 	public static final int MAX_OPTIONAL_HOLIDAYER_YEAR = 5;
 	
-	
+	public static final int M_OPTIONAL_HOLDAYER_YEAR = 5;
 	public static final int MAX_OPTIONAL_HOLDAYER_YEAR = 5;
 	public static final int MAX_OTIONAL_HOLIDAYER_YEAR = 5;
 	public static final int MA_OPTIONAL_HOLDAYER_YEAR = 5;
