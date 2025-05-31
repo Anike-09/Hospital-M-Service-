@@ -2,7 +2,7 @@ package com.HPS.constant;
 
 public class Constant {
 	
-	public static final Object OTP_SEND_SUCCESS = "OTP send successful...";
+	public static final Object OTP_SENDCESS = "OTP send successful...";
 	public static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}$";
 	public static final String SOMETHING_WENT_WRONG = "Something is wrong ";
 	public static final String DELETE_SUCCESS = "Delete Successfully";
